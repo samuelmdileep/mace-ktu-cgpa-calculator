@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/aiml.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/civil.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/cs.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/ds.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/ec.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/eee.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/mech.html</loc>
+  </url>
+
+  <url>
+    <loc>https://macecgpacalculator.netlify.app/departments.html</loc>
+  </url>
+
+</urlset>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="icon" href="macelogo.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MACE Departments</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f7ff url('macelogo.png') no-repeat center center;
+      background-size: 400px;
+      background-attachment: fixed;
+      opacity: 0.96;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #003366;
+      margin-bottom: 40px;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
+      margin-bottom: 35px; /* space below grid before button */
+    }
+
+    .dept-btn {
+      padding: 20px 15px;
+      background-color: #004080;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    }
+
+    .dept-btn:hover {
+      background-color: #036c9d;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    }
+
+    .back-btn-container {
+      text-align: center;
+    }
+
+    .back-btn {
+      background-color: #f61d1d;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 3px 8px rgba(246, 29, 29, 0.6);
+      transition: background-color 0.3s ease;
+       margin-bottom: 35px; /* space below grid before button */
+    }
+
+    .back-btn:hover {
+      background-color: #d41313;
+      box-shadow: 0 5px 12px rgba(212, 19, 19, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Select Department</h1>
+    <div class="back-btn-container">
+      <button onclick="location.href='index.html'" class="back-btn">
+        🔙 Back to CGPA Calculator
+      </button>
+    </div>
+    <div class="dept-grid">
+      <a href="aiml.html" class="dept-btn">AI & ML</a>
+      <a href="cs.html" class="dept-btn">Computer Science</a>
+      <a href="mech.html" class="dept-btn">Mechanical</a>
+      <a href="ec.html" class="dept-btn">Electronics & Comm.</a>
+      <a href="eee.html" class="dept-btn">EEE</a>
+      <a href="civil.html" class="dept-btn">Civil</a>
+      <a href="ds.html" class="dept-btn">Data Science</a>
+    </div>
+
+    
+  </div>
+</body>
+</html>
+

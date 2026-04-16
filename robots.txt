@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://macecgpacalculator.netlify.app/sitemap.xml

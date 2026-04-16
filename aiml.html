@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="icon" href="macelogo.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MA College of Engineering - SCGPA & CGPA Calculator</title>
+  <style>
+
+.back-btn {
+  background-color: #f61d1d;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #f61d1d;
+}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f7ff;
+      background-size: 300px;
+      background-attachment: fixed;
+      opacity: 0.98;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .logo {
+      width: 60px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .footer-logo {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.6;
+    }
+
+    .footer-logo img {
+      width: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #003366;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      text-align: center;
+      color: #003366;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .syllabus-btn {
+      background-color: #004080;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    .syllabus-btn:hover {
+      background-color: #0059b3;
+    }
+    .import-btn{
+      background-color: #ff01e6;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    .syllabus-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    .syllabus-table th, .syllabus-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .syllabus-table th {
+      background-color: #004080;
+      color: white;
+    }
+
+    .syllabus-section {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+  .back-to-dept-container {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .back-to-dept-btn {
+    background-color: #24f381;  /* Deep blue */
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 64, 128, 0.6);
+    transition: background-color 0.3s ease;
+  }
+
+  .back-to-dept-btn:hover {
+    background-color: ;  /* Lighter blue on hover */
+    box-shadow: 0 5px 12px rgba(3, 108, 157, 0.8);
+  }
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 30px auto 0 auto;
+  gap: 20px;
+}
+
+
+.syllabus-block {
+  flex: 1 1 calc(25% - 20px);
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+
+/* Main buttons */
+.main-btn {
+  background-color: #004080;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 64, 128, 0.6);
+  transition: background-color 0.3s ease;
+}
+
+.main-btn:hover {
+  background-color: #036c9d;
+}
+
+.syllabus-section.active {
+  display: block;
+}
+
+/* The syllabus section will break out to full width */
+.syllabus-section {
+  display: none;
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+
+
+
+/* ✅ Responsive - Stack buttons on small screens */
+
+  @media (max-width: 768px) {
+  .syllabus-block {
+    flex: 1 1 100%; /* stacked on mobile */
+  }
+
+  .main-btn {
+    margin-bottom: 10px;
+  }
+
+  .syllabus-section {
+    display: none;
+    margin-top: 10px;
+  
+  }
+
+  .syllabus-section.active {
+    display: block;
+  }
+ .syllabus-table {
+  width: 100%;
+  margin-top: 2px;
+  border-collapse: collapse;
+  word-wrap: break-word;
+}
+ .container {
+    padding: 15px 8px;     /* Less left-right padding */
+  }
+  }
+
+    
+</style>
+
+
+</head>
+<body>
+  <div class="container">
+    <img src="macelogo.png" class="logo" alt="MACE Logo" />
+    <h1>MA College of Engineering - SCGPA & CGPA Calculator<br>(Autonomous Batch)</h1>
+    <h2>Artificial Intelligence and Machine Learning</h2>
+
+<div class="back-btn-container">
+      <button onclick="location.href='index.html'" class="back-btn">🔙 Back to CGPA Calculator</button>
+    </div>
+    <div class="back-to-dept-container">
+      <button class="back-to-dept-btn" onclick="location.href='departments.html'">← Back to Department Selection</button>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; font-weight: bold; color: #d9534f;">
+      ⚠️ Note: Minor and Honors course credits are not included in CGPA calculation.
+    </div>
+
+    <div class="button-group">
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S1')">📘 View S1 Syllabus</button></div>
+      
+      <div id="S1" class="syllabus-section">
+  <h2>Semester 1 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24MA1T01</td><td>Linear Algebra and Multivariable Calculus</td><td>4</td></tr>
+    <tr><td>2</td><td>B24ES1T01A</td><td>Problem Solving & Programming Techniques</td><td>3</td></tr>
+    <tr><td>3</td><td>B24PH1T01A</td><td>Engineering Physics (A)</td><td>3</td></tr>
+    <tr><td>4</td><td>B24CY1T01A</td><td>Engineering Chemistry (A)</td><td>3</td></tr>
+    <tr><td>5</td><td>B24ES1T02</td><td>Basics of Electrical & Electronics Engineering</td><td>4</td></tr>
+    <tr><td>6</td><td>B24ES1L02</td><td>Basic Electrical and Electronics Workshop</td><td>1</td></tr>
+    <tr><td>7</td><td>B24ES1L01A</td><td>Programming Lab</td><td>2</td></tr>
+    <tr><td>8</td><td>B24PH1L01A</td><td>Engineering Physics Laboratory (A)</td><td>1</td></tr>
+    <tr><td>9</td><td>B24CY1L01A</td><td>Engineering Chemistry Laboratory (A)</td><td>1</td></tr>
+    <tr><td>10</td><td>B24MC1T01</td><td>Life Skills</td><td>P/F</td></tr>
+    <tr><td>11</td><td>B24MC1T02</td><td>Design Thinking</td><td>P/F</td></tr>
+    <tr><td>12</td><td>B24MC1L01</td><td>Yoga and Sports</td><td>P/F</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>21</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S1')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S2')">📘 View S2 Syllabus</button></div>
+      
+       <div id="S2" class="syllabus-section">
+  <h2>Semester 2 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24MA1T02</td><td>Ordinary Differential Equations and Transforms</td><td>4</td></tr>
+    <tr><td>2</td><td>B24ES1T03A</td><td>Computer Aided Engineering Graphics</td><td>3</td></tr>
+    <tr><td>3</td><td>B24CS1T01</td><td>Logic System Design</td><td>4</td></tr>
+    <tr><td>4</td><td>B24CS1T02</td><td>Industrial Programming</td><td>3</td></tr>
+    <tr><td>5</td><td>B24CS1T03</td><td>Object Oriented Programming</td><td>4</td></tr>
+    <tr><td>6</td><td>B24CS1L01</td><td>Industrial Programming Lab</td><td>2</td></tr>
+    <tr><td>7</td><td>B24CS1L02</td><td>Object Oriented Programming Lab</td><td>2</td></tr>
+    <tr><td>8</td><td>B24MC1T03</td><td>Professional Communication & Ethics</td><td>P/F</td></tr>
+    <tr><td>9</td><td>B24MC1L02</td><td>Idea Lab</td><td>P/F</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>22</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S2')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S3')">📘 View S3 Syllabus</button></div>
+      
+      <div id="S3" class="syllabus-section">
+  <h2>Semester 3 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24MA2T03C</td><td>Discrete Mathematics</td><td>4</td></tr>
+    <tr><td>2</td><td>B24CS2T01</td><td>Data Structures</td><td>4</td></tr>
+    <tr><td>3</td><td>B24CS2T02</td><td>Computer Organization and Architecture</td><td>4</td></tr>
+    <tr><td>4</td><td>B24CS2T03</td><td>Computer Networks</td><td>3</td></tr>
+    <tr><td>5</td><td>B24HU2T01</td><td>Business Economics and Financial Management</td><td>3</td></tr>
+    <tr><td>6</td><td>B24CS2L03</td><td>Data Structures Lab</td><td>2</td></tr>
+    <tr><td>7</td><td>B24CS2L04</td><td>Networking Lab</td><td>2</td></tr>
+    <tr><td>8</td><td>B24MC2T04</td><td>Universal Human Value and Constitutional Rights</td><td>P/F</td></tr>
+    <tr><td>9</td><td>B24MC2T05</td><td>Energy Conservation and Environmental Sustainability</td><td>P/F</td></tr>
+    <tr><td>10</td><td>Minor</td><td>Minor Course</td><td>4</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>22</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S3')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S4')">📘 View S4 Syllabus</button></div>
+
+      <div id="S4" class="syllabus-section">
+  <h2>Semester 4 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24MA2T04C</td><td>Graph Theory</td><td>4</td></tr>
+    <tr><td>2</td><td>B24CS2T04</td><td>Operating Systems</td><td>4</td></tr>
+    <tr><td>3</td><td>B24CS2T05</td><td>Formal Languages and Automata Theory</td><td>4</td></tr>
+    <tr><td>4</td><td>B24CS2T06</td><td>Database Management Systems</td><td>3</td></tr>
+    <tr><td>5</td><td>B24HU2T03</td><td>Entrepreneurship and Software Management Systems</td><td>3</td></tr>
+    <tr><td>6</td><td>B24CD2T01</td><td>Machine Learning Concepts</td><td>3</td></tr>
+    <tr><td>7</td><td>B24CS2L05</td><td>Logic System Design and Operating Systems Lab</td><td>2</td></tr>
+    <tr><td>8</td><td>B24CS2L06</td><td>Database Lab</td><td>2</td></tr>
+    <tr><td>9</td><td>Minor</td><td>Minor Course</td><td>4</td></tr>
+    <tr><td>10</td><td>Honors</td><td>Honors Course</td><td>4</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>25</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S4')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S5')">📘 View S5 Syllabus</button></div>
+      <div id="S5" class="syllabus-section">
+  <h2>Semester 5 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24CD3T01</td><td>Data Analytics</td><td>4</td></tr>
+    <tr><td>2</td><td>B24AM3T01</td><td>Big Data Processing</td><td>4</td></tr>
+    <tr><td>3</td><td>B24CS3T03</td><td>Compiler Design</td><td>4</td></tr>
+    <tr><td>4</td><td>B24CS3T04</td><td>Algorithm Analysis and Design</td><td>4</td></tr>
+    <tr><td>5</td><td>B24CS3T05</td><td>Artificial Intelligence</td><td>3</td></tr>
+    <tr><td>6</td><td>B24CS3P1X</td><td>Programme Elective I</td><td>3</td></tr>
+    <tr><td>7</td><td>B24CD3L07</td><td>Data Analytics Lab</td><td>2</td></tr>
+    <tr><td>8</td><td>B24AM3L08</td><td>Machine Learning Lab</td><td>2</td></tr>
+    <tr><td>9</td><td>Minor</td><td>Minor Course</td><td>4</td></tr>
+    <tr><td>10</td><td>Honors</td><td>Honors Course</td><td>4</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>26</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S5')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S6')">📘 View S6 Syllabus</button></div>
+      <div id="S6" class="syllabus-section">
+  <h2>Semester 6 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24CD3T06</td><td>Data Mining</td><td>4</td></tr>
+    <tr><td>2</td><td>B24AM3T07</td><td>Concepts of Natural Language Processing</td><td>4</td></tr>
+    <tr><td>3</td><td>B24AM3T08</td><td>Data Handling and Visualization</td><td>4</td></tr>
+    <tr><td>4</td><td>B24AM3T09</td><td>Robotics and Intelligence Systems</td><td>4</td></tr>
+    <tr><td>5</td><td>B24CS3P2X</td><td>Programme Elective II</td><td>3</td></tr>
+    <tr><td>6</td><td>B24CS3G1X</td><td>Open Elective I</td><td>3</td></tr>
+    <tr><td>7</td><td>B24AM3L09</td><td>Artificial Intelligence Lab</td><td>2</td></tr>
+    <tr><td>8</td><td>B24CS3L10</td><td>Mini Project</td><td>2</td></tr>
+    <tr><td>9</td><td>Minor</td><td>Minor Course</td><td>4</td></tr>
+    <tr><td>10</td><td>Honors</td><td>Honors Course</td><td>4</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>26</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S6')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S7')">📘 View S7 Syllabus</button></div>
+      
+
+      <div id="S7" class="syllabus-section">
+  <h2>Semester 7 Syllabus</h2>
+  <table class="syllabus-table">
+    <tr>
+      <th>SN</th>
+      <th>Course No.</th>
+      <th>Course Title</th>
+      <th>Credit</th>
+    </tr>
+    <tr><td>1</td><td>B24CD4T01</td><td>Deep Learning Techniques</td><td>3</td></tr>
+    <tr><td>2</td><td>B24CS4P3X</td><td>Programme Elective III</td><td>3</td></tr>
+    <tr><td>3</td><td>B24CS4P4X</td><td>Programme Elective IV</td><td>3</td></tr>
+    <tr><td>4</td><td>B24CS4G2X</td><td>Open Elective II</td><td>3</td></tr>
+    <tr><td>5</td><td>B24HU4T04</td><td>Disaster Management and Industrial Safety</td><td>3</td></tr>
+    <tr><td>6</td><td>B24AM4L11</td><td>Natural Language Processing Lab</td><td>2</td></tr>
+    <tr><td>7</td><td>B24AM4L12</td><td>Project Phase 1</td><td>3</td></tr>
+    <tr><td>8</td><td>B24AM4L13</td><td>Seminar</td><td>2</td></tr>
+    <tr><td>9</td><td>B24AM4T02</td><td>Viva Voce</td><td>1</td></tr>
+    <tr><td>10</td><td>Minor</td><td>Minor Course</td><td>4</td></tr>
+    <tr><td>11</td><td>Honors</td><td>Honors Course</td><td>4</td></tr>
+    <tr><th colspan="3">Total Credit</th><th>23</th></tr>
+  </table>
+
+  <div style="text-align:center; margin-top: 10px;">
+    <button onclick="importToCalculator('S7')" class="import-btn">📥 Import to Calculator</button>
+  </div>
+</div>
+
+      <div class="syllabus-block"><button class="main-btn" onclick="toggleSyllabus('S8')">📘 View S8 Syllabus</button></div>
+    </div>
+
+     <div id="S8" class="syllabus-section">
+      <h2>Semester 8 Syllabus</h2>
+      <table class="syllabus-table">
+        <tr>
+            <th>SN</th>
+            <th>Course No.</th>
+            <th>Course Title</th>
+            <th>Credit</th>
+        </tr>
+        <tr>
+            <td>1 2 3</td>
+            <td> </td>
+            <td>INTERNSHIP & MOOC COURSES**(3 NUMBERS)</td>
+            <td>9</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td style="text-align: center;">OR</td>
+
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>B24EE4P5X</td>
+            <td>Programme Elective V</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>B24EE4P6X</td>
+            <td>Programme Elective VI</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>B24EE4G3X</td>
+            <td>Open Elective III</td>
+            <td>3</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td style="text-align: center;">AND</td>
+
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>B24EE4L14</td>
+            <td>PROJECT PHASE II</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>B24EE4L15</td>
+            <td>Minor Project** </td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td></td>
+            <td>Honors Project** </td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <th colspan="3">Total Credit</th>
+            <th>15</th>
+        </tr>
+    </table>
+    
+    <div style="text-align:center; margin-top: 10px;">
+      <button onclick="importToCalculator('S8')" class="import-btn">📥 Import to Calculator</button>
+    </div>
+  </div>
+      <div style="height: 15px;"></div>
+
+ <!-- Modal HTML (place at the end of the body) -->
+<div id="popupModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; opacity:0; transition:opacity 0.3s;">
+  <div style="
+    background:#f9f9f9; 
+    padding:30px 40px; 
+    border-radius:12px; 
+    width:500px; 
+    max-width:90%; 
+    margin:8% auto; 
+    text-align:center; 
+    box-shadow:0 8px 20px rgba(0,0,0,0.25); 
+    transform:scale(0.9); 
+    transition: transform 0.3s, opacity 0.3s;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  ">
+    <h2 style="margin-bottom:20px; color:#333;">Choose Your Semester 8 Option</h2>
+
+    <div style="text-align:left; font-size:17px; color:#444;">
+      <label style="display:block; margin-bottom:12px;">
+        <input type="radio" name="selection" value="internship" style="transform: scale(1.2); margin-right:10px;">
+        Internship & MOOC (9 Credits)
+      </label>
+      <label style="display:block; margin-bottom:20px;">
+        <input type="radio" name="selection" value="electives" style="transform: scale(1.2); margin-right:10px;">
+        Program Electives (3 Courses)
+      </label>
+    </div>
+
+    <div style="margin-top:25px;">
+      <button onclick="confirmSelection()" style="
+        background:linear-gradient(to right, #0f9d58, #34a853); 
+        color:white; 
+        padding:12px 25px; 
+        font-size:16px; 
+        border:none; 
+        border-radius:6px; 
+        cursor:pointer; 
+        margin-right:10px;
+        transition: background 0.3s;
+      ">✅ Confirm</button>
+
+      <button onclick="closePopup()" style="
+        background:linear-gradient(to right, #d93025, #ea4335); 
+        color:white; 
+        padding:12px 25px; 
+        font-size:16px; 
+        border:none; 
+        border-radius:6px; 
+        cursor:pointer;
+        transition: background 0.3s;
+      ">❌ Cancel</button>
+    </div>
+  </div>
+</div>
+
+    <!-- Repeat for S3 to S8 -->
+
+    <div class="footer-logo">
+      <img src="macelogo.png" alt="MACE" />
+    </div>
+  </div>
+  <script>
+    
+
+  function importToCalculator(semesterId) {
+    if (semesterId === 'S8') {
+      // Show the popup with animation
+      document.getElementById('popupModal').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('popupModal').style.opacity = '1';
+        document.getElementById('popupModal').querySelector('div').style.transform = 'scale(1)';
+      }, 10);
+
+      // Store semester ID globally for use in confirmSelection
+      window.selectedSemester = semesterId;
+    } else {
+      // For other semesters, directly collect data
+      const section = document.getElementById(semesterId);
+      const table = section.querySelector("table");
+      const rows = table.querySelectorAll("tr");
+      const subjects = [];
+
+      for (let i = 1; i < rows.length - 1; i++) {
+        const cells = rows[i].querySelectorAll("td");
+        if (cells.length === 4) {
+          const subject = cells[2].textContent.trim();
+          const credit = cells[3].textContent.trim();
+
+          if (/honor|minor/i.test(subject)) continue;
+
+          if (!isNaN(parseFloat(credit))) {
+            subjects.push({
+              subject: subject,
+              grade: "s",
+              credit: credit
+            });
+          }
+        }
+      }
+
+      // Save with expiry
+      const expiryTime = new Date().getTime() + 1 * 60 * 1000;
+      localStorage.setItem("subjectData", JSON.stringify(subjects));
+      localStorage.setItem("subjectDataExpiry", expiryTime.toString());
+
+      window.location.href = "index.html";
+    }
+  }
+
+  function confirmSelection() {
+    const selectedOption = document.querySelector('input[name="selection"]:checked');
+    if (!selectedOption) {
+      alert("Please select an option!");
+      return;
+    }
+
+    const selection = selectedOption.value;
+    const subjects = [];
+
+    if (selection === "internship") {
+      subjects.push({
+        subject: "Internship & MOOC Courses",
+        grade: "s",
+        credit: "9"
+      });
+    } else if (selection === "electives") {
+      subjects.push({ subject: "Programme Elective V", grade: "s", credit: "3" });
+      subjects.push({ subject: "Programme Elective VI", grade: "s", credit: "3" });
+      subjects.push({ subject: "Open Elective III", grade: "s", credit: "3" });
+    }
+
+    // Common for both selections
+    subjects.push({ subject: "PROJECT PHASE II", grade: "s", credit: "6" });
+
+    const expiryTime = new Date().getTime() + 1 * 60 * 1000;
+    localStorage.setItem("subjectData", JSON.stringify(subjects));
+    localStorage.setItem("subjectDataExpiry", expiryTime.toString());
+
+    closePopup();
+    window.location.href = "index.html";
+  }
+
+  function closePopup() {
+    // Apply fade-out effect before closing
+    const popup = document.getElementById('popupModal');
+    popup.style.opacity = '0';
+    setTimeout(() => {
+      popup.style.display = 'none';
+    }, 300); // Match the fade-out duration
+  }
+</script>
+
+<script>
+
+function toggleSyllabus(id) {
+  const allSections = document.querySelectorAll('.syllabus-section');
+  allSections.forEach(section => {
+    if (section.id === id) {
+      section.classList.toggle('active');
+    } else {
+      section.classList.remove('active');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
+

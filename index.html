@@ -1,0 +1,1146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="canonical" href="https://macecgpacalculator.netlify.app/">
+  <meta name="author" content="Samuel M Dileep">
+<meta name="description" content="Free MACE CGPA Calculator for KTU students. Calculate SGPA & CGPA instantly with MACE syllabus support. Fast, accurate, and easy to use.">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="MACE CGPA, CGPA calculator, MACE engineering grades">
+<meta property="og:title" content="MACE CGPA Calculator (KTU)">
+<meta property="og:description" content="Calculate your CGPA easily with MACE syllabus support.">
+<meta property="og:url" content="https://macecgpacalculator.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://macecgpacalculator.netlify.app/macelogo.png">
+   <link rel="icon" href="macelogo.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MACE CGPA Calculator (KTU) – Fast & Accurate SGPA & CGPA Tool</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MACE CGPA Calculator",
+  "url": "https://macecgpacalculator.netlify.app/",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "All"
+}
+</script>
+
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f7ff url('macelogo.png') no-repeat center center;
+      background-size: 400px;
+      background-attachment: fixed;
+      opacity: 0.96;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .logo {
+      width: 60px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #003366;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .add-btn, .calc-btn, .clear-btn, .syllabus-btn {
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+      color: white;
+    }
+
+    .add-btn { background-color: #004080; }
+    .calc-btn { background-color: #004080; }
+    .clear-btn { background-color: #f61d1d; }
+    .syllabus-btn { background-color: #24f381; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .scgp-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .footer-logo {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.6;
+    }
+
+    .footer-logo img {
+      width: 30px;
+    }
+
+    /* Grade Editor Popup */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: auto; /* Optional, for wide tables */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.popup h2 {
+  text-align: center;
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+#grade-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+#grade-table th,
+#grade-table td {
+  padding: 8px; /* Reduced padding */
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+#grade-table input {
+  width: 60px; /* Reduced input width */
+  text-align: center;
+}
+
+.popup .btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.popup button {
+  padding: 8px 12px; /* Reduced button padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-btn {
+  background-color: #17c12a;
+  color: white;
+}
+
+.reset-btn {
+  background-color: #f39c12;
+  color: white;
+}
+
+.close-btn {
+  background-color: #e74c3c;
+  color: white;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+/* Help button style */
+/* Ensure the grid container is relatively positioned */
+.grid {
+  position: relative;
+}
+
+ .help-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+ /* Modal backdrop */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  overflow: auto; /* allows modal to scroll if viewport too small */
+}
+
+/* Modal content box */
+.modal-content {
+  background: white;
+  max-width: 480px;
+  margin: 10vh auto;
+  padding: 25px 30px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+  /* Scrollability */
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Header style */
+.modal-content h3 {
+  margin-top: 0;
+  color: #004080;
+}
+
+/* Table styling */
+.modal-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.modal-content th, .modal-content td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.modal-content thead th {
+  background-color: #004080;
+  color: white;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #004080;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ff0000;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  position: relative; 
+  
+}
+
+/* Make grid a positioned container */
+/* Button container inside grid */
+.about-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px;
+  grid-column: -1;
+  grid-row: -1;
+}
+
+/* About "i" button */
+#aboutBtn {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #50555b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#aboutBtn:hover {
+  background-color: #0066cc;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 480px;
+  margin: 30px auto; /* 👈 Opens from near top */
+  padding: 25px 20px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: slideDown 0.3s ease-out; /* 👈 Smooth slide animation */
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+  /* Layout for subject row */
+  #subject-container .subject-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .subject-row input[type="text"] {
+    flex: 2 1 55%;
+    min-width: 120px;
+  }
+
+  .subject-row input[type="number"],
+  .subject-row select {
+    flex: 1 1 20%;
+    min-width: 60px;
+  }
+
+  /* General button styles */
+  .add-btn, .calc-btn, .clear-btn, .syllabus-btn {
+    margin: 8px 5px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  /* SCGPA input spacing */
+  .scgp-row {
+    margin-bottom: 8px;
+  }
+
+  /* Add SCGPA -> Calculate Total CGPA spacing */
+  #scgpInputs + .add-btn {
+    margin-top: 12px;
+  }
+
+  .calc-btn:last-of-type {
+    margin-top: 10px;
+  }
+
+  /* Add extra spacing between Calculate CGPA and Print Summary */
+  #totalCGPResult + .calc-btn {
+    margin-top: 40px;
+  }
+
+  /* Extra spacing before syllabus */
+  .syllabus-btn {
+    margin-top: 25px;
+  }
+
+  /* Align CLEAR DATA and Edit Grade Points in one row */
+  .footer-btns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* Responsive layout */
+  @media (max-width: 600px) {
+    .add-btn, .calc-btn, .clear-btn, .syllabus-btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .subject-row {
+      flex-direction: column;
+    }
+
+    .subject-row input,
+    .subject-row select {
+      width: 100%;
+    }
+
+    .footer-btns {
+      flex-direction: column;
+    }
+  }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="macelogo.png" class="logo" alt="MACE Logo" />
+    <h1>MA College of Engineering - SCGPA & CGPA Calculator<br>(Autonomous Batch)</h1>
+    <button id="cgpaHelpBtn" title="What is CGPA?" class="help-btn">?</button>
+
+    <div id="subject-container"></div>
+    <button class="add-btn" onclick="addSubject()">+ Add Subject</button>
+    <button class="calc-btn" onclick="calculateSCGPA()">Calculate SCGPA</button>
+    <div class="result" id="scgpResult"></div>
+
+    <h3 style="margin-top: 40px;">Total CGPA Calculation</h3>
+    <div id="scgpInputs">
+      <div class="scgp-row">
+        <input type="number" step="0.01" placeholder="SCGP 1" class="scgp-value"/>
+      </div>
+    </div>
+    <button class="add-btn" onclick="addSCGPField()">+ Add SCGPA</button>
+    <button class="calc-btn" onclick="calculateTotalCGPA()">Calculate Total CGPA</button>
+    <div class="result" id="totalCGPResult"></div>
+
+    <button class="calc-btn" onclick="printSummary()">🖨️ Print Summary</button>
+    <button class="syllabus-btn" onclick="viewsyllabus()">📘 View Syllabus</button>
+    <button class="clear-btn" onclick="clearSCGPAFields()">CLEAR DATA</button>
+    <button class="add-btn" onclick="openGradeEditor()">Edit Grade Points</button>
+
+    <!-- About Button at Bottom Right Inside Grid -->
+<div class="about-button-wrapper">
+  <button id="aboutBtn" title="About the developer">i</button>
+</div>
+
+<!-- Modal -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>About the developer</h3>
+    <p>This site was created by <strong>Samuel M Dileep</strong>, a passionate developer from MA College of Engineering (2024-2028).</p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/samuelmdileep" target="_blank">github.com/samuelmdileep</a></p>
+    <p><strong>Email:</strong> <a href="mailto:samuelmdileep@gmail.com">samuelmdileep@gmail.com</a></p>
+    <p>Feel free to reach out for suggestions or feedback!</p>
+  </div>
+</div>
+
+
+    <!-- Grade Editor Overlay -->
+    <div class="overlay" id="gradeEditor">
+      <div class="popup">
+        <button class="close-btn" onclick="closeGradeEditor()">Cancel</button>
+        <h2>Edit Grade Points</h2>
+        <table id="grade-table">
+          <thead>
+            <tr><th>Grade</th><th>Grade Point</th></tr>
+          </thead>
+          <tbody id="grade-table-body"></tbody>
+        </table>
+        <div class="btn-container">
+          <button class="save-btn" onclick="saveGradePoints()">Save</button>
+          <button class="reset-btn" onclick="resetGradePoints()">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Help Modal (Place outside .grid at end of body) -->
+<div id="cgpaModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+     <h3>Understanding SCGPA and CGPA</h3>
+  
+  <p><strong>SCGPA</strong> (Semester Grade Point Average) measures your academic performance for a single semester.</p>
+  
+  <p><strong>CGPA</strong> (Cumulative Grade Point Average) is the average of all your semester GPAs till date.</p>
+
+  <p><strong>CGPA Formula:</strong></p>
+  <p style="font-weight: bold; font-size: 1.1em; margin: 10px 0;">
+    CGPA = <em>Sum of (Grade Point × Credit)</em> ÷ <em>Total Credits</em>
+  </p>
+
+  <h4>Grading System:</h4>
+  <table>
+    <thead>
+      <tr><th>Marks Range</th><th>Grade</th><th>Grade Point</th></tr>
+    </thead>
+  <tbody>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">90 - 100</td><td>S</td><td>10</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">85 - 89</td><td>A+</td><td>9.5</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">80 - 84</td><td>A</td><td>9.0</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">75 - 79</td><td>B+</td><td>8.5</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">70 - 74</td><td>B</td><td>8.0</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">65 - 69</td><td>C+</td><td>7.5</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">60 - 64</td><td>C</td><td>7.0</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">55 - 59</td><td>D</td><td>6.0</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">50 - 54</td><td>P</td><td>5.5</td></tr>
+      <tr><td style="border: 1px solid #ccc; padding: 8px;">Below 50</td><td>F (Fail)</td><td>0</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 10px;">👉 To see the detailed Grade Point System or edit grades, please click on <strong>"Edit Grade Points"</strong>.</p>
+</div>
+ 
+
+  <script>
+   const defaultGrades = {
+    "S": 10, "A+": 9, "A": 8.5, "B+": 8, "B": 7.5,
+    "C+": 7, "C": 6.5, "D": 6, "P": 5.5, "F": 0,
+    "FE": 0, "I": 0, "AB": 0
+};
+
+// Get the custom grade points from localStorage, or default to predefined ones
+function getGradePoints() {
+    return JSON.parse(localStorage.getItem("customGradePoints")) || defaultGrades;
+}
+function viewsyllabus() {
+  window.location.href = "departments.html";
+}
+
+// Open the grade editor and display current grade points
+function openGradeEditor() {
+    const grades = getGradePoints();
+    const tbody = document.getElementById("grade-table-body");
+    tbody.innerHTML = ""; // Clear the existing rows
+
+    const editableGrades = ["S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "F"];
+
+    // Loop through the grades, and only display those from "S" to "F"
+    for (const [grade, point] of Object.entries(grades)) {
+        if (editableGrades.includes(grade)) {
+            const value = point;
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td><strong>${grade}</strong></td>
+              <td><input type="number" id="grade-${grade}" value="${value}" step="0.1" /></td>
+            `;
+            tbody.appendChild(row);
+        }
+    }
+
+    document.getElementById("gradeEditor").style.display = "flex";
+}
+
+
+// Save the modified grade points into localStorage
+const editableGrades = ["S", "A+", "A", "B+", "B", "C+", "C", "D", "P", "F"];
+
+function saveGradePoints() {
+    const newGrades = {};
+
+    // Only loop through editable grades shown in the popup
+    for (const grade of editableGrades) {
+        const input = document.getElementById(`grade-${grade}`);
+        if (!input) continue; // skip if input doesn't exist
+        const val = parseFloat(input.value);
+        newGrades[grade] = isNaN(val) ? defaultGrades[grade] : val;
+    }
+
+    // Preserve uneditable grades (FE, AB, I) with default values
+    for (const grade of Object.keys(defaultGrades)) {
+        if (!editableGrades.includes(grade)) {
+            newGrades[grade] = defaultGrades[grade];
+        }
+    }
+
+    localStorage.setItem("customGradePoints", JSON.stringify(newGrades));
+    closeGradeEditor(); // ✅ This will now run correctly
+}
+
+// Reset grade points to default values
+function resetGradePoints() {
+    localStorage.removeItem("customGradePoints");
+    closeGradeEditor();
+}
+// Close the grade editor without saving
+function closeGradeEditor() {
+    document.getElementById("gradeEditor").style.display = "none";
+}
+
+
+  
+function saveInputsToLocalStorage() {
+  const rows = document.getElementsByClassName("grid");
+  const data = [];
+
+  for (let i = 0; i < rows.length; i++) {
+    const subject = rows[i].children[0].value;
+    const grade = rows[i].children[1].value;
+    const credit = rows[i].children[2].value;
+    data.push({ subject, grade, credit });
+  }
+
+  localStorage.setItem("subjectData", JSON.stringify(data));
+}
+function loadSubjects() {
+  const imported = JSON.parse(localStorage.getItem('importedSubjects'));
+  const savedData = JSON.parse(localStorage.getItem("subjectData"));
+  const container = document.getElementById("subject-container");
+  container.innerHTML = "";
+  let subjectCount = 0;
+
+  // ✅ If imported syllabus exists
+  if (imported && imported.length > 0) {
+    // Clear all existing subject rows
+    container.innerHTML = "";
+    
+    // ✅ Create rows based on the imported syllabus (no padding to 6)
+    const filtered = imported.filter(subject => {
+      const title = subject.title.toLowerCase();
+      return !title.includes("honor") && !title.includes("minor");
+    });
+
+    filtered.forEach(subject => {
+      createSubjectRow(subject.title, subject.credit, "S");
+      subjectCount++;
+    });
+
+    // Remove the imported syllabus from localStorage after usage
+    localStorage.removeItem("importedSubjects");
+
+    localStorage.setItem("subjectCount", subjectCount); // Save actual imported count
+  } 
+  // ✅ If saved data exists (when no syllabus is imported)
+  else if (savedData && savedData.length > 0) {
+    savedData.forEach(item => {
+      createSubjectRow(item.subject, item.credit, item.grade);
+      subjectCount++;
+    });
+
+    localStorage.setItem("subjectCount", subjectCount);
+  } 
+  // ✅ No data at all
+  else {
+    while (subjectCount < 6) {
+      createSubjectRow();
+      subjectCount++;
+    }
+  }
+}
+
+
+document.addEventListener("input", () => {
+  if (!window._isClearing) saveInputsToLocalStorage();
+});
+
+window.onload = () => {
+  loadSubjects();
+};
+
+
+
+function createSubjectRow(title = "", credit = "", grade = "S") {
+  const container = document.getElementById("subject-container");
+  const row = document.createElement("div");
+  row.className = "grid";
+
+  const subjectInput = document.createElement("input");
+  subjectInput.type = "text";
+  subjectInput.placeholder = "Subject";
+  subjectInput.value = title;
+
+  const gradeSelect = document.createElement("select");
+  const grades = Object.keys(getGradePoints());
+  grades.forEach(g => {
+    const option = document.createElement("option");
+    option.value = g;
+    option.textContent = g;
+    if (g === grade) option.selected = true;
+    gradeSelect.appendChild(option);
+  });
+
+  const creditInput = document.createElement("input");
+  creditInput.type = "number";
+  creditInput.placeholder = "Credit";
+  creditInput.step = "0.5";
+  creditInput.value = credit;
+
+  row.appendChild(subjectInput);
+  row.appendChild(gradeSelect);
+  row.appendChild(creditInput);
+  container.appendChild(row);
+}
+
+
+function addSubject() {
+      if (subjectCount < 10) {
+        createSubjectRow();
+        subjectCount++;
+        saveSubjectsToStorage();
+      } else {
+        alert("Maximum 10 subjects allowed.");
+      }
+    }
+
+  function calculateSCGPA() {
+    const rows = document.getElementsByClassName("grid");
+    let totalCredits = 0, totalPoints = 0;
+
+    const gradePoints = getGradePoints(); // Get the custom or default grade points
+
+    for (let row of rows) {
+        const grade = row.children[1].value; // grade input in the second column
+        const credits = parseFloat(row.children[2].value); // credits input in the third column
+
+        if (isNaN(credits)) continue;
+
+        // Use the custom grade points
+        totalCredits += credits;
+        totalPoints += gradePoints[grade] * credits;
+    }
+
+    const result = document.getElementById("scgpResult");  // Make sure to reference the correct ID
+
+    if (totalCredits > 0) {
+        const scgpa = (totalPoints / totalCredits).toFixed(2);
+        result.textContent = `SCGPA: ${scgpa}`;
+        localStorage.setItem("scgpaResult", scgpa);
+    } else {
+        result.textContent = "Enter valid credits.";
+    }
+}
+    function addSCGPField() {
+      const container = document.getElementById("scgpInputs");
+      const row = document.createElement("div");
+      row.className = "scgp-row";
+      const input = document.createElement("input");
+      input.type = "number";
+      input.step = "0.01";
+      input.placeholder = `SCGP ${container.children.length + 1}`;
+      input.className = "scgp-value";
+      row.appendChild(input);
+      container.appendChild(row);
+    }
+
+    function calculateTotalCGPA() {
+      const inputs = document.getElementsByClassName("scgp-value");
+      let total = 0, count = 0;
+      for (let input of inputs) {
+        const val = parseFloat(input.value);
+        if (!isNaN(val)) {
+          total += val;
+          count++;
+        }
+      }
+      const result = document.getElementById("totalCGPResult");
+      if (count > 0) {
+        const cgpa = (total / count).toFixed(2);
+        const percentage = (cgpa * 10).toFixed(2);
+        result.innerHTML = `Total CGPA: ${cgpa} <br>Equivalent Percentage: ${percentage}%`;
+        localStorage.setItem("totalCGPA", cgpa);
+      } else {
+        result.textContent = "Enter valid SCGPA values.";
+      }
+    }
+
+    function clearSCGPAFields() {
+  window._isClearing = true; // Prevent saving during clear
+
+  const container = document.getElementById("subject-container");
+  const rows = document.getElementsByClassName("grid");
+
+  // Clear the fields for all current rows
+  for (let row of rows) {
+    row.children[0].value = ""; // Clear subject field
+    row.children[1].value = "S"; // Set grade to 'S' (default)
+    row.children[2].value = ""; // Clear credit field
+    row.children[2].readOnly = false; // Allow editing of credit field
+    row.children[2].classList.remove("dim-input"); // Remove dim style from credit field
+    row.children[2].placeholder = "Credit"; // Reset placeholder
+  }
+
+  // Reset the SCGPA result text
+   document.getElementById("scgpResult").textContent = "";
+
+  // Clear stored data in localStorage
+  localStorage.removeItem("subjectData");
+  localStorage.removeItem("scgpaResult");
+
+  // Ensure 6 rows are always present
+  const currentRowCount = rows.length;
+  if (currentRowCount > 6) {
+    // If more than 6 rows, remove extra rows
+    for (let i = currentRowCount - 1; i >= 6; i--) {
+      rows[i].remove();
+    }
+  } else if (currentRowCount < 6) {
+    // If fewer than 6 rows, create the missing rows
+    while (rows.length < 6) {
+      createSubjectRow();
+    }
+  }
+
+  // Set the number of subjects
+  localStorage.setItem("subjectCount", 6);
+
+  window._isClearing = false; // Allow saving again
+  clearCGPAFields()
+  localStorage.removeItem("scgpaResult");
+
+}
+function addSubject(subject = "", grade = "", credit = "") {
+  const container = document.getElementById("subject-container");
+
+  const div = document.createElement("div");
+  div.className = "grid";
+
+  div.innerHTML = `
+    <input type="text" placeholder="Subject" value="${subject}" />
+    <select>
+      ${Object.keys(getGradePoints()).map(g => `<option ${grade === g ? 'selected' : ''}>${g}</option>`).join('')}
+    </select>
+    <input type="number" step="0.5" placeholder="Credits" value="${credit}" />
+  `;
+
+  container.appendChild(div);
+}
+
+
+function clearCGPAFields() {
+  const container = document.getElementById("scgpInputs");
+  
+  // Clear all existing SCGP input rows
+  container.innerHTML = '';
+
+  // Add back one default row for SCGP input
+  addSCGPField(); 
+
+  // Clear the total CGPA result
+  document.getElementById("totalCGPResult").textContent = "";
+
+  // Remove the total CGPA from localStorage
+  localStorage.removeItem("totalCGPA");
+}
+
+    function printSummary() {
+  const win = window.open('', '', 'height=800,width=1000');
+  const logoURL = "macelogo.png";
+  const logoURL2="macelogo.png";
+  const rows = document.getElementsByClassName("grid");
+  let scgpa = localStorage.getItem("scgpaResult");
+  if (!scgpa || scgpa === "null") scgpa = "-";
+  const cgpa = localStorage.getItem("totalCGPA") || "-";
+  const percentage = (cgpa !== "-") ? (cgpa * 10).toFixed(2) + "%" : "-";
+
+  let table = `
+    <table>
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Grade</th>
+          <th>Credit</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  for (let i = 0; i < rows.length; i++) {
+    const subject = rows[i].children[0].value || `Subject ${i + 1}`;
+    const grade = rows[i].children[1].value;
+    const credit = rows[i].children[2].value || "-";
+    
+    if (!credit || isNaN(parseFloat(credit))) continue;
+
+    table += `
+      <tr>
+        <td>${subject}</td>
+        <td>${grade}</td>
+        <td>${credit}</td>
+      </tr>
+    `;
+  }
+
+  table += `
+      </tbody>
+    </table>
+  `;
+
+  if (!win) {
+    alert("Popup blocked. Please allow popups for this site.");
+    return;
+  }
+
+  win.document.write(`
+    <html>
+    <head>
+      <title>SCGPA Summary - MACE</title>
+      <style>
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin: 40px auto;
+          max-width: 900px;
+          color: #333;
+          background: #fff;
+          position: relative;
+        }
+        header {
+          display: flex;
+          align-items: center;
+          border-bottom: 2px solid #004080;
+          padding-bottom: 15px;
+          margin-bottom: 30px;
+        }
+        
+        header img {
+          height: 60px;
+          margin-right: 20px;
+        }
+        header h1 {
+          font-size: 1.8rem;
+          color: #004080;
+          margin: 0;
+          font-weight: 700;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 30px;
+          font-size: 1rem;
+        }
+        th, td {
+          padding: 12px 15px;
+          border: 1px solid #ddd;
+          text-align: center;
+        }
+        thead th {
+          background-color: #004080;
+          color: #fff;
+          font-weight: 600;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #f3f6f9;
+        }
+        tbody tr:hover {
+          background-color: #d6e4f0;
+        }
+        .summary {
+          text-align: center;
+          font-size: 1.2rem;
+          color: #004080;
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+        footer {
+          text-align: center;
+          font-size: 0.85rem;
+          color: #777;
+          border-top: 1px solid #ddd;
+          padding-top: 10px;
+          margin-top: 40px;
+        }
+        footer a {
+          color: #004080;
+          text-decoration: none;
+          font-weight: 600;
+        }
+        footer a:hover {
+          text-decoration: underline;
+        }
+          
+        .watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 700px;         
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.09;        /* subtle opacity */
+  z-index: -1;          /* behind all content */
+  pointer-events: none;
+  user-select: none;
+}
+  .watermark img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+      }
+
+      * {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+@page {
+  size: auto;
+  margin: 20mm;
+}
+
+
+      </style>
+    </head>
+    <body>
+      <header>
+        <img src="${logoURL2}" alt="MACE Logo" />
+        <h1>SCGPA Summary</h1>
+      </header>
+
+      <div class="watermark">
+        <img src="${logoURL}" alt="Watermark Logo" />
+      </div>
+
+      ${table}
+
+      <div class="summary"><strong>SCGPA:</strong> ${scgpa}</div>
+      <div class="summary"><strong>CGPA:</strong> ${cgpa} &nbsp;&nbsp; <strong>Percentage:</strong> ${percentage}</div>
+
+      <footer>
+        Downloaded from <a href="https://macecgpacalculator.netlify.app/" target="_blank" rel="noopener noreferrer">
+        https://macecgpacalculator.netlify.app</a>
+      </footer>
+    </body>
+    </html>
+  `);
+
+  win.document.close();
+  win.focus();
+  win.print();
+}
+
+ 
+</script>
+<script>
+  // CGPA Modal
+  const helpBtn = document.querySelector('.help-btn');
+  const cgpaModal = document.getElementById('cgpaModal');
+  const closeCgpa = cgpaModal.querySelector('.close');
+
+  // About Modal
+  const aboutBtn = document.getElementById('aboutBtn');
+  const aboutModal = document.getElementById('aboutModal');
+  const closeAbout = aboutModal.querySelector('.close');
+
+  // Track current modal
+  let currentModal = null;
+
+  function openModal(modalElement, type) {
+    modalElement.style.display = 'block';
+    currentModal = type;
+
+    if (!history.state || history.state.modal !== type) {
+      history.pushState({ modal: type }, '');
+    }
+  }
+
+  function closeModal(modalElement, type) {
+    modalElement.style.display = 'none';
+    currentModal = null;
+
+    if (history.state?.modal === type) {
+      history.back(); // This will trigger popstate
+    }
+  }
+
+  // Event listeners
+  helpBtn.addEventListener('click', () => openModal(cgpaModal, 'cgpa'));
+  closeCgpa.addEventListener('click', () => closeModal(cgpaModal, 'cgpa'));
+
+  aboutBtn.addEventListener('click', () => openModal(aboutModal, 'about'));
+  closeAbout.addEventListener('click', () => closeModal(aboutModal, 'about'));
+
+  // Click outside to close
+  window.addEventListener('click', (e) => {
+    if (e.target === cgpaModal) closeModal(cgpaModal, 'cgpa');
+    if (e.target === aboutModal) closeModal(aboutModal, 'about');
+  });
+
+  // Handle Android back
+  window.addEventListener('popstate', (e) => {
+    if (currentModal === 'cgpa') {
+      cgpaModal.style.display = 'none';
+      currentModal = null;
+    } else if (currentModal === 'about') {
+      aboutModal.style.display = 'none';
+      currentModal = null;
+    }
+  });
+
+  // Initial state push to make back button not exit immediately
+  window.addEventListener('load', () => {
+    if (!history.state) {
+      history.replaceState({ modal: null }, '');
+    }
+  });
+</script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-82WVNK1L9G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-82WVNK1L9G');
+</script>
+
+
+</body>
+</html>
+
