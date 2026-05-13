@@ -100,7 +100,8 @@ CGPA = (Sum of (Grade Point × Credit)) ÷ Total Credits
 Built by **Samuel M Dileep**  
 🎓 Student at **MA College of Engineering (2024-2028)**
 
-- 📧 Email: `samuelmdileep@gmail.com`  
+- 📧 Email: `samuelmdileep@gmail.com`
+- Linkdin:  'https://www.linkedin.com/in/samuel-m-dileep-b84960314'
 - 💻 GitHub: [github.com/samuelmdileep](https://github.com/samuelmdileep)
 
 ---
