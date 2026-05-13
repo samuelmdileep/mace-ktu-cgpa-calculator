@@ -109,3 +109,5 @@ Built by **Samuel M Dileep**
 ## 🌐 Live Site
 
 [`https://macecgpacalculator.netlify.app/`](https://macecgpacalculator.netlify.app/)
+
+https://samuelmdileep.github.io/mace-ktu-cgpa-calculator/
